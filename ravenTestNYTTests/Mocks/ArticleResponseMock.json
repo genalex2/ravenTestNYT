@@ -1,0 +1,28 @@
+{
+    "status": "OK",
+    "copyright": "Copyright (c) 2024 The New York Times Company. All Rights Reserved.",
+    "num_results": 1,
+    "results": [
+        {
+            "id": 100000009809091,
+            "uri": "nyt://article/c5004496-36f6-59c4-8d65-8c95b53fe7ee",
+            "url": "https://www.nytimes.com/2024/11/28/business/airline-loyalty-programs-rethinking.html",
+            "source": "New York Times",
+            "published_date": "2024-11-28",
+            "updated": "2024-11-28 13:46:21",
+            "section": "Business",
+            "subsection": null,
+            "nytdsection": "business",
+            "adx_keywords": "Personal Finances;Business Travel;Credit Cards;Customer Loyalty Programs",
+            "byline": "By Mike Dang",
+            "type": "Article",
+            "title": "Frequent Fliers Are Rethinking Loyalty Programs and Setting Themselves Free",
+            "abstract": "Some travelers, frustrated with changing airline rewards programs, have stopped chasing status and adopted different strategies when booking flights and using credit cards.",
+            "des_facet": ["Personal Finances", "Business Travel"],
+            "org_facet": ["Delta Air Lines Inc", "American Airlines"],
+            "per_facet": null,
+            "geo_facet": null,
+            "media": []
+        }
+    ]
+}
