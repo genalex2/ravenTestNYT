@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  ravenTestNYT
+
+  Created by Genaro Alexis Nuño Valenzuela on 01/12/24.
+  
+*/
+
+// MARK: Global
+"global.loading" = "Loading...";
+"global.error" = "Error";
+"global.ok" = "OK";
+"global.details" = "Details";
+
+
+// MARK: Articles
+"articles.popular" = "Popular Articles";
+
+
+// MARK: Service
+"service.desc.invalidURL" = "The URL is invalid. Please check the API endpoint.";
+"service.desc.invalidPeriod" = "The period must be between 1 and 30 days.";
+"service.desc.invalidResponse" = "The server response was invalid or unexpected.";
+"service.desc.httpError" = "HTTP Error: %@. Please try again later.";
+"service.desc.decodingError" = "Failed to decode the response. Error: %@";
+"service.desc.networkError" = "Network error occurred. Error: %@";
+"service.desc.unknown" = "An unknown error occurred: %@";

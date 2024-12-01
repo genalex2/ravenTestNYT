@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9001929F2CFCD16100C33FE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9001929E2CFCD16100C33FE3 /* Localizable.strings */; };
+		900192A12CFCD20700C33FE3 /* Strings+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900192A02CFCD20700C33FE3 /* Strings+Extensions.swift */; };
+		900192A32CFCD76100C33FE3 /* NYTDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900192A22CFCD76100C33FE3 /* NYTDimension.swift */; };
 		9056CE1E2CFA8421009736FE /* ravenTestNYTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE1D2CFA8421009736FE /* ravenTestNYTApp.swift */; };
 		9056CE232CFA8421009736FE /* ArticleModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE212CFA8421009736FE /* ArticleModel.xcdatamodeld */; };
 		9056CE272CFA8421009736FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9056CE262CFA8421009736FE /* Assets.xcassets */; };
@@ -25,6 +28,8 @@
 		9056CE6C2CFA94ED009736FE /* ArticleResponseMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 9056CE6B2CFA94ED009736FE /* ArticleResponseMock.json */; };
 		9056CE732CFA999D009736FE /* ArticleModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE212CFA8421009736FE /* ArticleModel.xcdatamodeld */; };
 		9056CE782CFA9B91009736FE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE772CFA9B91009736FE /* PersistenceController.swift */; };
+		9056CE7E2CFAD6A3009736FE /* ArticleListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE7D2CFAD6A3009736FE /* ArticleListViewModelTests.swift */; };
+		9056CE802CFADEAF009736FE /* MockArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE7F2CFADEAF009736FE /* MockArticles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9001929E2CFCD16100C33FE3 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		900192A02CFCD20700C33FE3 /* Strings+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Extensions.swift"; sourceTree = "<group>"; };
+		900192A22CFCD76100C33FE3 /* NYTDimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTDimension.swift; sourceTree = "<group>"; };
 		9056CE1A2CFA8421009736FE /* ravenTestNYT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ravenTestNYT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9056CE1D2CFA8421009736FE /* ravenTestNYTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ravenTestNYTApp.swift; sourceTree = "<group>"; };
 		9056CE222CFA8421009736FE /* ravenTestNYT.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ravenTestNYT.xcdatamodel; sourceTree = "<group>"; };
@@ -66,6 +74,8 @@
 		9056CE692CFA948E009736FE /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
 		9056CE6B2CFA94ED009736FE /* ArticleResponseMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ArticleResponseMock.json; sourceTree = "<group>"; };
 		9056CE772CFA9B91009736FE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		9056CE7D2CFAD6A3009736FE /* ArticleListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModelTests.swift; sourceTree = "<group>"; };
+		9056CE7F2CFADEAF009736FE /* MockArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockArticles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +154,6 @@
 			children = (
 				9056CE682CFA9484009736FE /* Mocks */,
 				9056CE642CFA9385009736FE /* ViewModels */,
-				9056CE632CFA936B009736FE /* Views */,
 				9056CE622CFA935A009736FE /* Services */,
 				9056CE612CFA9349009736FE /* Utilities */,
 			);
@@ -209,16 +218,10 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		9056CE632CFA936B009736FE /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		9056CE642CFA9385009736FE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				9056CE7D2CFAD6A3009736FE /* ArticleListViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -227,6 +230,9 @@
 			isa = PBXGroup;
 			children = (
 				9056CE662CFA9422009736FE /* SampleData.swift */,
+				9001929E2CFCD16100C33FE3 /* Localizable.strings */,
+				900192A02CFCD20700C33FE3 /* Strings+Extensions.swift */,
+				900192A22CFCD76100C33FE3 /* NYTDimension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -236,6 +242,7 @@
 			children = (
 				9056CE692CFA948E009736FE /* MockDataLoader.swift */,
 				9056CE6B2CFA94ED009736FE /* ArticleResponseMock.json */,
+				9056CE7F2CFADEAF009736FE /* MockArticles.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -353,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9056CE2B2CFA8421009736FE /* Preview Assets.xcassets in Resources */,
+				9001929F2CFCD16100C33FE3 /* Localizable.strings in Resources */,
 				9056CE272CFA8421009736FE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,11 +387,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				900192A12CFCD20700C33FE3 /* Strings+Extensions.swift in Sources */,
 				9056CE592CFA844B009736FE /* ArticleDetailView.swift in Sources */,
 				9056CE5B2CFA844B009736FE /* ArticleListViewModel.swift in Sources */,
 				9056CE5C2CFA844B009736FE /* Article.swift in Sources */,
 				9056CE782CFA9B91009736FE /* PersistenceController.swift in Sources */,
 				9056CE672CFA9422009736FE /* SampleData.swift in Sources */,
+				900192A32CFCD76100C33FE3 /* NYTDimension.swift in Sources */,
 				9056CE5A2CFA844B009736FE /* ArticleListView.swift in Sources */,
 				9056CE582CFA844B009736FE /* ArticleService.swift in Sources */,
 				9056CE1E2CFA8421009736FE /* ravenTestNYTApp.swift in Sources */,
@@ -395,6 +405,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9056CE802CFADEAF009736FE /* MockArticles.swift in Sources */,
+				9056CE7E2CFAD6A3009736FE /* ArticleListViewModelTests.swift in Sources */,
 				9056CE602CFA8981009736FE /* MockURLProtocol.swift in Sources */,
 				9056CE6A2CFA948E009736FE /* MockDataLoader.swift in Sources */,
 				9056CE732CFA999D009736FE /* ArticleModel.xcdatamodeld in Sources */,

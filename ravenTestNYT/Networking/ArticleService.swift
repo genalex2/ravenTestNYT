@@ -15,11 +15,20 @@ protocol ArticleServiceProtocol {
 
 // MARK: - ArticleService
 class ArticleService: ArticleServiceProtocol {
-    private let apiKey = "qTl6HA9lEk9bHwEMNSrdjRAceMnSqQEZ"
-    private let baseURL = "https://api.nytimes.com/svc/mostpopular/v2/emailed"
+    private let apiKey: String
+    private let baseURL: String
     private let session: URLSession
     
     init(session: URLSession = .shared) {
+        // Carga las variables de entorno
+        self.apiKey = ProcessInfo.processInfo.environment["API_KEY"] ?? ""
+        self.baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
+        
+        // Verifica que las claves no estén vacías
+        guard !apiKey.isEmpty, !baseURL.isEmpty else {
+            fatalError("API_KEY o BASE_URL no configurados en variables de entorno.")
+        }
+        
         self.session = session
     }
     
@@ -62,11 +71,10 @@ class ArticleService: ArticleServiceProtocol {
             .decode(type: ArticlesResponse.self, decoder: JSONDecoder())
             .map(\.results)
             .mapError { error -> ArticleServiceError in
-                print("Error occurred: \(error)")
-                if let decodingError = error as? DecodingError {
-                    return .decodingError(decodingError)
-                } else if let urlError = error as? URLError {
+                if let urlError = error as? URLError {
                     return .networkError(urlError)
+                } else if let decodingError = error as? DecodingError {
+                    return .decodingError(decodingError)
                 } else if let serviceError = error as? ArticleServiceError {
                     return serviceError
                 } else {
@@ -90,19 +98,19 @@ enum ArticleServiceError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "The URL is invalid. Please check the API endpoint."
+            return "service.desc.invalidURL".localized()
         case .invalidPeriod:
-            return "The period must be between 1 and 30 days."
+            return "service.desc.invalidPeriod".localized()
         case .invalidResponse:
-            return "The server response was invalid or unexpected."
+            return "service.desc.invalidResponse".localized()
         case .httpError(let statusCode):
-            return "HTTP Error: \(statusCode). Please try again later."
+            return "service.desc.httpError".localized(formatArgs: statusCode)
         case .decodingError(let error):
-            return "Failed to decode the response. Error: \(error.localizedDescription)"
+            return "service.desc.decodingError".localized(formatArgs: error.localizedDescription)
         case .networkError(let error):
-            return "Network error occurred. Error: \(error.localizedDescription)"
+            return "service.desc.networkError".localized(formatArgs: error.localizedDescription)
         case .unknown(let error):
-            return "An unknown error occurred: \(error.localizedDescription)"
+            return "service.desc.unknown".localized(formatArgs: error.localizedDescription)
         }
     }
 }

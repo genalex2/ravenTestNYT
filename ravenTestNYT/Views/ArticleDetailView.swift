@@ -12,28 +12,28 @@ struct ArticleDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: NYTDimension.point_16) {
                 // Imagen del artículo
                 if let imageUrl = article.media.first?.mediaMetadata.last?.url {
                     AsyncImage(url: URL(string: imageUrl)) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
-                                .frame(height: 200)
+                                .frame(height: NYTDimension.point_200)
                                 .frame(maxWidth: .infinity)
                         case .success(let image):
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .frame(height: 200)
+                                .frame(height: NYTDimension.point_200)
                                 .frame(maxWidth: .infinity)
                                 .clipped()
-                                .cornerRadius(10)
+                                .cornerRadius(NYTDimension.ten)
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 200)
+                                .frame(height: NYTDimension.point_200)
                                 .foregroundColor(.gray)
                         @unknown default:
                             EmptyView()
@@ -46,7 +46,7 @@ struct ArticleDetailView: View {
                     .font(.title)
                     .bold()
                     .multilineTextAlignment(.leading)
-                    .padding(.vertical, 4)
+                    .padding(.vertical, NYTDimension.four)
 
                 // Información adicional (autor y fecha)
                 HStack {
@@ -66,13 +66,13 @@ struct ArticleDetailView: View {
                 // Resumen del artículo
                 Text(article.abstract)
                     .font(.body)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, NYTDimension.eight)
 
                 Spacer()
             }
             .padding()
         }
-        .navigationTitle("Details")
+        .navigationTitle("global.details".localized())
         .navigationBarTitleDisplayMode(.inline)
     }
 }

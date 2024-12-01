@@ -30,7 +30,8 @@ class ArticleListViewModel: ObservableObject {
                 self?.isLoading = false
                 switch completion {
                 case .failure(let error):
-                    self?.error = ErrorWrapper(message: error.localizedDescription)
+                    print("Received Error: \(error.localizedDescription)") // Debugging log
+                    self?.error = ErrorWrapper(message: error.errorDescription ?? "An unexpected error occurred.")
                 case .finished:
                     break
                 }

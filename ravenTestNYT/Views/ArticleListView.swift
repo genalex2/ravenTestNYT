@@ -14,15 +14,15 @@ struct ArticleListView: View {
         NavigationView {
             ZStack {
                 if viewModel.isLoading {
-                    ProgressView("Loading...")
-                        .scaleEffect(1.5, anchor: .center)
+                    ProgressView("global.loading".localized())
+                        .scaleEffect(NYTDimension.point1_5, anchor: .center)
                 } else {
                     List(viewModel.articles) { article in
                         NavigationLink(destination: ArticleDetailView(article: article)) {
                             VStack(alignment: .leading) {
                                 Text(article.title)
                                     .font(.headline)
-                                    .lineLimit(2)
+                                    .lineLimit(NYTDimension.two)
                                 Text(article.byline)
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
@@ -31,12 +31,12 @@ struct ArticleListView: View {
                     }
                 }
             }
-            .navigationTitle("Popular Articles")
+            .navigationTitle("articles.popular".localized())
             .alert(item: $viewModel.error) { error in
                 Alert(
-                    title: Text("Error"),
+                    title: Text("global.error".localized()),
                     message: Text(error.message),
-                    dismissButton: .default(Text("OK"))
+                    dismissButton: .default(Text("global.ok".localized()))
                 )
             }
         }
