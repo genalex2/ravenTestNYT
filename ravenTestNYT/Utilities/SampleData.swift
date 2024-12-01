@@ -10,23 +10,11 @@ import Foundation
 // Datos de ejemplo reutilizables
 let sampleArticle = Article(
     id: 100000009809091,
-    uri: "nyt://article/c5004496-36f6-59c4-8d65-8c95b53fe7ee",
-    url: "https://www.nytimes.com/2024/11/28/business/airline-loyalty-programs-rethinking.html",
-    source: "New York Times",
-    publishedDate: "2024-11-28",
-    updated: "2024-11-28 13:46:21",
-    section: "Business",
-    subsection: nil,
-    nytdsection: "business",
-    adxKeywords: "Personal Finances;Business Travel;Credit Cards;Customer Loyalty Programs",
-    byline: "By Mike Dang",
-    type: "Article",
     title: "Frequent Fliers Are Rethinking Loyalty Programs and Setting Themselves Free",
     abstract: "Some travelers, frustrated with changing airline rewards programs, have stopped chasing status and adopted different strategies when booking flights and using credit cards.",
-    desFacet: ["Personal Finances", "Business Travel"],
-    orgFacet: ["Delta Air Lines Inc", "American Airlines"],
-    perFacet: [],
-    geoFacet: [],
+    publishedDate: "2024-11-28",
+    url: "https://www.nytimes.com/2024/11/28/business/airline-loyalty-programs-rethinking.html",
+    byline: "By Mike Dang",
     media: [
         Media(
             type: "image",
