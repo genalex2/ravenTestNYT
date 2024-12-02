@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Datos de ejemplo reutilizables
 let sampleArticle = Article(
     id: 100000009809091,
     title: "Frequent Fliers Are Rethinking Loyalty Programs and Setting Themselves Free",

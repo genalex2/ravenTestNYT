@@ -7,12 +7,7 @@
 
 import Foundation
 
-
-import Foundation
-
-// swiftlint:disable identifier_name
 struct NYTDimension {
-   
     static let zero: Int = 0
     /// Margin one = 1
     static let one: Int = 1

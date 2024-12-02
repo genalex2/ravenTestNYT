@@ -12,7 +12,6 @@ class MockURLProtocol: URLProtocol {
     static var responseError: Error?
 
     override class func canInit(with request: URLRequest) -> Bool {
-        // Intercepta todas las solicitudes de red
         return true
     }
 
@@ -39,6 +38,6 @@ class MockURLProtocol: URLProtocol {
     }
 
     override func stopLoading() {
-        // Este método no necesita implementación para los tests
+        //No-op
     }
 }

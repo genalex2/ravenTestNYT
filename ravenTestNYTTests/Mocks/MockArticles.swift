@@ -8,7 +8,6 @@
 import Foundation
 
 @testable import ravenTestNYT
-
 let mockArticles = [
     Article(
         id: 100000009809091,

@@ -1,6 +1,7 @@
 //
 //  ArticleService.swift
 //  ravenTestNYT
+//  Handles network requests to fetch articles from the API.
 //
 //  Created by Genaro Alexis Nuño Valenzuela on 29/11/24.
 //
@@ -10,6 +11,9 @@ import Combine
 
 // MARK: - ArticleServiceProtocol
 protocol ArticleServiceProtocol {
+    /// Fetches the most popular articles for a given period.
+    /// - Parameter period: The number of days to fetch data for.
+    /// - Returns: A publisher emitting an array of articles or an error.
     func fetchPopularArticles(period: Int) -> AnyPublisher<[Article], ArticleServiceError>
 }
 
@@ -20,11 +24,9 @@ class ArticleService: ArticleServiceProtocol {
     private let session: URLSession
     
     init(session: URLSession = .shared) {
-        // Carga las variables de entorno
         self.apiKey = ProcessInfo.processInfo.environment["API_KEY"] ?? ""
         self.baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
         
-        // Verifica que las claves no estén vacías
         guard !apiKey.isEmpty, !baseURL.isEmpty else {
             fatalError("API_KEY o BASE_URL no configurados en variables de entorno.")
         }
@@ -32,6 +34,7 @@ class ArticleService: ArticleServiceProtocol {
         self.session = session
     }
     
+    /// Fetches popular articles from the network.
     func fetchPopularArticles(period: Int) -> AnyPublisher<[Article], ArticleServiceError> {
         // Validate the period
         guard period > 0 && period <= 30 else {

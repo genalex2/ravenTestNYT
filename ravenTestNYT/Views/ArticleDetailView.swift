@@ -13,7 +13,6 @@ struct ArticleDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: NYTDimension.point_16) {
-                // Imagen del artículo
                 if let imageUrl = article.media.first?.mediaMetadata.last?.url {
                     AsyncImage(url: URL(string: imageUrl)) { phase in
                         switch phase {
@@ -40,15 +39,13 @@ struct ArticleDetailView: View {
                         }
                     }
                 }
-
-                // Título del artículo
+                
                 Text(article.title)
                     .font(.title)
                     .bold()
                     .multilineTextAlignment(.leading)
                     .padding(.vertical, NYTDimension.four)
-
-                // Información adicional (autor y fecha)
+                
                 HStack {
                     if !article.byline.isEmpty {
                         Text(article.byline)
@@ -62,8 +59,7 @@ struct ArticleDetailView: View {
                 }
 
                 Divider()
-
-                // Resumen del artículo
+                
                 Text(article.abstract)
                     .font(.body)
                     .padding(.bottom, NYTDimension.eight)
