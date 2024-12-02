@@ -15,12 +15,14 @@ class ArticleListViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private let articleService: ArticleServiceProtocol
+    private let persistenceManager: PersistenceManager
     
-    init(articleService: ArticleServiceProtocol = ArticleService()) {
+    init(articleService: ArticleServiceProtocol = ArticleService(),
+         persistenceManager: PersistenceManager = PersistenceManager.shared) {
         self.articleService = articleService
+        self.persistenceManager = persistenceManager
         fetchArticles()
     }
-    
     
     func fetchArticles() {
         isLoading = true
@@ -30,14 +32,31 @@ class ArticleListViewModel: ObservableObject {
                 self?.isLoading = false
                 switch completion {
                 case .failure(let error):
-                    print("Received Error: \(error.localizedDescription)") // Debugging log
                     self?.error = ErrorWrapper(message: error.errorDescription ?? "An unexpected error occurred.")
+                    self?.loadLocalArticles() // Cargar artículos locales en caso de error
                 case .finished:
                     break
                 }
             }, receiveValue: { [weak self] articles in
                 self?.articles = articles
+                self?.saveArticlesToLocalDatabase(articles) // Guardar localmente
             })
             .store(in: &cancellables)
+    }
+    
+    private func loadLocalArticles() {
+        do {
+            articles = try persistenceManager.fetchArticles()
+        } catch {
+            NSLog("Failed to load local articles: \(error)")
+        }
+    }
+    
+    private func saveArticlesToLocalDatabase(_ articles: [Article]) {
+        do {
+            try persistenceManager.saveArticles(articles)
+        } catch {
+            NSLog("Failed to save articles: \(error)")
+        }
     }
 }

@@ -7,44 +7,31 @@
 
 import CoreData
 
-struct PersistenceController {
+class PersistenceController {
     static let shared = PersistenceController()
 
     let container: NSPersistentContainer
 
+    // Inicialización con soporte para modo en memoria (útil para pruebas)
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "ArticleModel") // Asegúrate de usar el nombre correcto del modelo
+        container = NSPersistentContainer(name: "ArticleModel") // Reemplaza con el nombre de tu modelo Core Data
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.loadPersistentStores { _, error in
+        container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
     }
 
-    static var preview: PersistenceController = {
-        let controller = PersistenceController(inMemory: true)
-        let context = controller.container.viewContext
+    // Contexto principal para la UI
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
 
-        // Carga de datos de ejemplo en Core Data para previsualización
-        let article = ArticleEntity(context: context) // Reemplaza con tu modelo de Core Data
-        article.title = "Example Article"
-        article.abstract = "This is an example article abstract."
-        article.byline = "By Preview Author"
-        
-        // Convertir Date a String (puedes usar un formato adecuado)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd" // Ajusta el formato si es necesario
-        article.publishedDate = formatter.string(from: Date())
-
-        do {
-            try context.save()
-        } catch {
-            fatalError("Failed to save preview data: \(error)")
-        }
-
-        return controller
-    }()
+    // Contexto en segundo plano para tareas largas
+    func newBackgroundContext() -> NSManagedObjectContext {
+        return container.newBackgroundContext()
+    }
 }

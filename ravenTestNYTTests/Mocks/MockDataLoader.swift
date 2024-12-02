@@ -10,7 +10,7 @@ import Foundation
 struct MockDataLoader {
     static func loadMockJSON(named fileName: String) -> Data? {
         guard let url = Bundle(for: ArticleServiceTests.self).url(forResource: fileName, withExtension: "json") else {
-            print("Error: Could not find JSON file \(fileName)")
+            NSLog("Error: Could not find JSON file \(fileName)")
             return nil
         }
         return try? Data(contentsOf: url)

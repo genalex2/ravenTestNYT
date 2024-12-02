@@ -47,10 +47,10 @@ class ArticleServiceTests: XCTestCase {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Test Error: \(error.localizedDescription)")
+                    NSLog("Test Error: \(error.localizedDescription)")
                     XCTFail("Expected success, but got error: \(error.localizedDescription)")
                 case .finished:
-                    print("Test Finished Successfully")
+                    NSLog("Test Finished Successfully")
                 }
             }, receiveValue: { articles in
                 XCTAssertEqual(articles.count, 1)

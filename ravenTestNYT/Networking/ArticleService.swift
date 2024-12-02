@@ -54,12 +54,12 @@ class ArticleService: ArticleServiceProtocol {
                 .eraseToAnyPublisher()
         }
         
-        print("Generated URL: \(url)")
+        NSLog("Generated URL: \(url)")
         
         // Make the network request
         return session.dataTaskPublisher(for: url)
             .tryMap { output -> Data in
-                print("Received response: \(output.response)")
+                NSLog("Received response: \(output.response)")
                 guard let response = output.response as? HTTPURLResponse else {
                     throw ArticleServiceError.invalidResponse
                 }
