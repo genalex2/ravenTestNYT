@@ -31,6 +31,7 @@
 		9056CE782CFA9B91009736FE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE772CFA9B91009736FE /* PersistenceController.swift */; };
 		9056CE7E2CFAD6A3009736FE /* ArticleListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE7D2CFAD6A3009736FE /* ArticleListViewModelTests.swift */; };
 		9056CE802CFADEAF009736FE /* MockArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9056CE7F2CFADEAF009736FE /* MockArticles.swift */; };
+		90D962692CFE35920068F065 /* ArticleServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D962682CFE35920068F065 /* ArticleServiceError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		9056CE772CFA9B91009736FE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		9056CE7D2CFAD6A3009736FE /* ArticleListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModelTests.swift; sourceTree = "<group>"; };
 		9056CE7F2CFADEAF009736FE /* MockArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockArticles.swift; sourceTree = "<group>"; };
+		90D962682CFE35920068F065 /* ArticleServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleServiceError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				9056CE4E2CFA844B009736FE /* ArticleService.swift */,
+				90D962682CFE35920068F065 /* ArticleServiceError.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				9056CE5A2CFA844B009736FE /* ArticleListView.swift in Sources */,
 				9056CE582CFA844B009736FE /* ArticleService.swift in Sources */,
 				9056CE1E2CFA8421009736FE /* ravenTestNYTApp.swift in Sources */,
+				90D962692CFE35920068F065 /* ArticleServiceError.swift in Sources */,
 				9056CE232CFA8421009736FE /* ArticleModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
