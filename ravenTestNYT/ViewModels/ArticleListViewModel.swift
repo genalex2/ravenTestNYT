@@ -15,7 +15,7 @@ class ArticleListViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private let articleService: ArticleServiceProtocol
-    private let persistenceManager: PersistenceManager
+    let persistenceManager: PersistenceManager
     
     init(articleService: ArticleServiceProtocol = ArticleService(),
          persistenceManager: PersistenceManager = PersistenceManager.shared) {

@@ -17,7 +17,13 @@ final class ArticleListViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         articleServiceMock = MockArticleService()
-        viewModel = ArticleListViewModel(articleService: articleServiceMock)
+        
+        // Inicializa un contexto en memoria
+        let persistenceController = PersistenceController(inMemory: true)
+        let persistenceManager = PersistenceManager(context: persistenceController.viewContext)
+        
+        // Pasa el PersistenceManager al ViewModel
+        viewModel = ArticleListViewModel(articleService: articleServiceMock, persistenceManager: persistenceManager)
         cancellables = []
     }
     
@@ -28,6 +34,29 @@ final class ArticleListViewModelTests: XCTestCase {
         super.tearDown()
     }
     
+    func testLoadingState() {
+        articleServiceMock.mockResult = .success(mockArticles)
+        
+        let expectation = expectation(description: "Loading state changes correctly")
+        
+        var loadingStates: [Bool] = []
+        
+        viewModel.$isLoading
+            .sink { isLoading in
+                loadingStates.append(isLoading)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.fetchArticles()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            XCTAssertEqual(loadingStates, [true, true, false , false])
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2.0)
+    }
+    
     func testFetchArticlesSuccess() {
         articleServiceMock.mockResult = .success(mockArticles)
         
@@ -35,6 +64,7 @@ final class ArticleListViewModelTests: XCTestCase {
         
         viewModel.$articles
             .dropFirst()
+            .first(where: { !$0.isEmpty })
             .sink { articles in
                 XCTAssertEqual(articles.count, mockArticles.count)
                 XCTAssertEqual(articles.first?.title, mockArticles.first?.title)
@@ -84,25 +114,51 @@ final class ArticleListViewModelTests: XCTestCase {
         waitForExpectations(timeout: 2.0)
     }
     
-    func testLoadingState() {
+    func testPersistenceAfterFetch() {
         articleServiceMock.mockResult = .success(mockArticles)
         
-        let expectation = expectation(description: "Loading state changes correctly")
+        let expectation = expectation(description: "Articles persisted successfully")
         
-        var loadingStates: [Bool] = []
-        
-        viewModel.$isLoading
-            .sink { isLoading in
-                loadingStates.append(isLoading)
+        viewModel.$articles
+            .dropFirst()
+            .first(where: { !$0.isEmpty })
+            .sink { [weak self] articles in
+                XCTAssertEqual(articles.count, mockArticles.count)
+                
+                // Verifica que los datos se guardaron en Core Data
+                let fetchedArticles = try? self?.viewModel.persistenceManager.fetchArticles()
+                XCTAssertEqual(articles.count, mockArticles.count)
+                XCTAssertEqual(articles.first?.title, mockArticles.first?.title)
+                
+                expectation.fulfill()
             }
             .store(in: &cancellables)
         
         viewModel.fetchArticles()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            XCTAssertEqual(loadingStates, [true, true, false , false])
-            expectation.fulfill()
-        }
+        waitForExpectations(timeout: 2.0)
+    }
+    
+    func testLoadFromCoreDataWhenOffline() {
+        // Simula que los artículos ya están guardados en Core Data
+        try? viewModel.persistenceManager.saveArticles(mockArticles)
+        
+        // Simula un fallo de red
+        articleServiceMock.mockResult = .failure(.networkError(URLError(.notConnectedToInternet)))
+        
+        let expectation = expectation(description: "Articles loaded from Core Data")
+        
+        viewModel.$articles
+            .dropFirst()
+            .first(where: { !$0.isEmpty })
+            .sink { articles in
+                XCTAssertEqual(articles.count, mockArticles.count)
+                XCTAssertEqual(articles.first?.title, mockArticles.first?.title)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.fetchArticles()
         
         waitForExpectations(timeout: 2.0)
     }

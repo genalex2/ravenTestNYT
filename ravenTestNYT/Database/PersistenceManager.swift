@@ -12,7 +12,7 @@ class PersistenceManager {
 
     private let context: NSManagedObjectContext
 
-    private init(context: NSManagedObjectContext = PersistenceController.shared.viewContext) {
+    init(context: NSManagedObjectContext = PersistenceController.shared.viewContext) {
         self.context = context
     }
 
